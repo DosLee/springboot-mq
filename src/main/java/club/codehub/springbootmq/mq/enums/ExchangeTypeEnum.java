@@ -1,4 +1,4 @@
-package club.codehub.springbootmq.mq;
+package club.codehub.springbootmq.mq.enums;
 
 import lombok.Getter;
 

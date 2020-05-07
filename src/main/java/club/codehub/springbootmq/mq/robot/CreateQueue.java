@@ -1,12 +1,21 @@
-package club.codehub.springbootmq.mq;
+package club.codehub.springbootmq.mq.robot;
 
+import club.codehub.springbootmq.mq.enums.ExchangeEnum;
+import club.codehub.springbootmq.mq.enums.QueueEnum;
 import club.codehub.springbootmq.utils.SpringBeanUtil;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Exchange;
+import org.springframework.amqp.core.ExchangeBuilder;
+import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.core.HeadersExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Map;
 
 /**
  * 描述:
@@ -47,7 +56,7 @@ public class CreateQueue {
                     break;
             }
             // 将交换机注册到spring bean工厂 让spring实现交换机的管理
-            Register.registerBean(exchangeEnum.toString() + "_exchange", exchange);
+            SpringBeanUtil.registerBean(exchangeEnum.toString() + "_exchange", exchange);
         });
     }
 
@@ -58,7 +67,7 @@ public class CreateQueue {
     public void createQueue() {
         // 遍历队列枚举 将队列注册到spring bean工厂 让spring实现队列的管理
         QueueEnum.toLists().forEach(queueEnum -> {
-            Register.registerBean(queueEnum.toString() + "_queue", new Queue(queueEnum.getQueueName(), queueEnum.isDurable(), queueEnum.isExclusive(), queueEnum.isAutoDelete(), queueEnum.getArguments()));
+            SpringBeanUtil.registerBean(queueEnum.toString() + "_queue", new Queue(queueEnum.getQueueName(), queueEnum.isDurable(), queueEnum.isExclusive(), queueEnum.isAutoDelete(), queueEnum.getArguments()));
         });
     }
 
@@ -101,7 +110,7 @@ public class CreateQueue {
                     break;
             }
             // 将绑定关系注册到spring bean工厂 让spring实现绑定关系的管理
-            Register.registerBean(queueEnum.toString() + "_binding", binding);
+            SpringBeanUtil.registerBean(queueEnum.toString() + "_binding", binding);
         });
     }
 }

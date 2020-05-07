@@ -1,8 +1,10 @@
 package club.codehub.springbootmq.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,11 +13,19 @@ import org.springframework.stereotype.Component;
  *
  * @author LIL on 2020-05-06 21:45
  */
+@Slf4j
 @Component
 public class SpringBeanUtil implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
-
+    
+    public static <T> boolean registerBean(String beanName, T bean) {
+        ConfigurableApplicationContext context = (ConfigurableApplicationContext) SpringBeanUtil.getApplicationContext();
+        context.getBeanFactory().registerSingleton(beanName, bean);
+        log.info("[Register注册实例] beanName: {} 到容器 {}", beanName, bean);
+        return true;
+    }
+    
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringBeanUtil.applicationContext = applicationContext;

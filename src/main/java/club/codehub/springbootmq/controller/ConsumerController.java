@@ -1,5 +1,6 @@
-package club.codehub.springbootmq.mq;
+package club.codehub.springbootmq.controller;
 
+import club.codehub.springbootmq.mq.enums.QueueEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rabbitMq")
 @Slf4j
-public class Consumer {
+public class ConsumerController {
 
     private final AmqpTemplate amqpTemplate;
 
-    public Consumer(AmqpTemplate amqpTemplate) {
+    public ConsumerController(AmqpTemplate amqpTemplate) {
         this.amqpTemplate = amqpTemplate;
     }
 

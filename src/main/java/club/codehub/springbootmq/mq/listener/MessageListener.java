@@ -1,10 +1,9 @@
-package club.codehub.springbootmq.mq;
+package club.codehub.springbootmq.mq.listener;
 
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class Listener {
+public class MessageListener {
 
     @RabbitListener(queues = {"#{queuesNames.topic_test}"})
     public void topicTest(Message message, Channel channel) {
