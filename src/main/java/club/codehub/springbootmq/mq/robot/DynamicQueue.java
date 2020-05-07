@@ -25,9 +25,9 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-public class CreateQueue {
+public class DynamicQueue {
 
-    @Bean("queuesNames")
+    @Bean
     public Map<String, String> queuesNames() {
         return QueueEnum.getQueuesNames();
     }
@@ -35,7 +35,7 @@ public class CreateQueue {
     /**
      * 动态创建交换机
      */
-    @Bean("createExchange")
+    @Bean
     public void createExchange() {
         // 遍历交换机枚举
         ExchangeEnum.toLists().forEach(exchangeEnum -> {
@@ -63,7 +63,7 @@ public class CreateQueue {
     /**
      * 动态创建队列
      */
-    @Bean("CreateQueue")
+    @Bean
     public void createQueue() {
         // 遍历队列枚举 将队列注册到spring bean工厂 让spring实现队列的管理
         QueueEnum.toLists().forEach(queueEnum -> {
@@ -74,7 +74,7 @@ public class CreateQueue {
     /**
      * 动态绑定
      */
-    @Bean("createBinding")
+    @Bean
     public void createBinding() {
         // 遍历队列枚举 将队列绑定到指定交换机
         QueueEnum.toLists().forEach(queueEnum -> {
