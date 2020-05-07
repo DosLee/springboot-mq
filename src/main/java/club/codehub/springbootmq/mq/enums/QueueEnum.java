@@ -1,13 +1,11 @@
 package club.codehub.springbootmq.mq.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * 描述:
@@ -66,7 +64,7 @@ public enum QueueEnum {
     ExchangeEnum exchangeEnum;
 
     public static Map<String, String> getQueuesNames() {
-        return Arrays.stream(QueueEnum.values()).collect(Collectors.toMap(Enum::toString, QueueEnum::getQueueName));
+        return Stream.of(values()).collect(Collectors.toMap(Enum::toString, QueueEnum::getQueueName));
     }
 
     public static List<QueueEnum> toLists() {
