@@ -3,8 +3,9 @@ server:
 
 spring:
   rabbitmq:
-    host: localhost
+    host: db.codehub.club
     port: 5672
-    username: root
-    password: root
+    username: guest
+    password: guest
+    virtual-host: guest
 

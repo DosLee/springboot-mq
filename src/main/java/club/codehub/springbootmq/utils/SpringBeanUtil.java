@@ -19,11 +19,12 @@ public class SpringBeanUtil implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
     
-    public static <T> boolean registerBean(String beanName, T bean) {
+    public static <T> void registerBean(String beanName, T bean) {
         ConfigurableApplicationContext context = (ConfigurableApplicationContext) SpringBeanUtil.getApplicationContext();
         context.getBeanFactory().registerSingleton(beanName, bean);
-        log.info("[Register注册实例] beanName: {} 到容器 {}", beanName, bean);
-        return true;
+        if (log.isDebugEnabled()) {
+            log.debug("[Register注册实例] beanName: {} 注册到容器 {}", beanName, bean);
+        }
     }
     
     @Override

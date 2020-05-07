@@ -29,7 +29,7 @@ public enum ExchangeEnum {
     ExchangeTypeEnum type;
 
     /**
-     * 是否为持久交换机
+     * 是否为持久化交换机
      */
     boolean durable;
 
