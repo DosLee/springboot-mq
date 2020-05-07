@@ -67,7 +67,10 @@ public class DynamicQueue {
     public void createQueue() {
         // 遍历队列枚举 将队列注册到spring bean工厂 让spring实现队列的管理
         QueueEnum.toLists().forEach(queueEnum -> {
-            SpringBeanUtil.registerBean(queueEnum.toString() + "_queue", new Queue(queueEnum.getQueueName(), queueEnum.isDurable(), queueEnum.isExclusive(), queueEnum.isAutoDelete(), queueEnum.getArguments()));
+            SpringBeanUtil.registerBean(queueEnum.toString() + "_queue",
+                    new Queue(queueEnum.getQueueName(), queueEnum.isDurable(),
+                            queueEnum.isExclusive(), queueEnum.isAutoDelete(),
+                            queueEnum.getArguments()));
         });
     }
 
